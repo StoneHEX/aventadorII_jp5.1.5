@@ -1,5 +1,8 @@
 # aventadorII_jp5.1.5
 # JETPACK 5.1.5 build system for AventadorII
+# Prerequisites
+The scripts in this repo run on a completely running sdkmanager created system and modify the standard sdkmanager installed system to include some new drivers described below.<br>
+If you plan to use both NANO and NX modules you have to install both targets.<br>
 # Installation notes
 Download or clone the repo and expand in the <sdk_manager_installation_path> ( the one where you find JetPack_5.1.5_Linux_JETSON_ORIN_NX_TARGETS or JetPack_5.1.5_Linux_JETSON_ORIN_NANO_TARGETS directories)<br><br>
 # How to use<br>
