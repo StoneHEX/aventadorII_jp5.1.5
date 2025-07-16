@@ -9,7 +9,7 @@ Example : <br>
 <b>./compile_kernel ORIN_NANO</b> creates a ORIN NANO kernel <br><br>
 This script download the compiler if not available and all the requested modules.<br><br>
 The <b>./aventadorII_flash ORIN_NX</b> flashes the newly created kernel and modules on the AventadorII Orin NX module.<br>
-The <b>./aventadorIIo# Notes<br>_flash ORIN_NANO</b> flashes the newly created kernel and modules on the AventadorII Orin NANO module.<br><br>
+The <b>./aventadorII_flash ORIN_NANO</b> flashes the newly created kernel and modules on the AventadorII Orin NANO module.<br><br>
 # Additional Notes
 In order to downgrade a previously installed JP6 from $JETPACK you can issue :<br>
 <b> sudo ./flash.sh -c ./bootloader/t186ref/cfg/flash_t234_qspi.xml jetson-orin-nano-devkit mmcblk0p1</b>
