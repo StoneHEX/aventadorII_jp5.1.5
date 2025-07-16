@@ -1,3 +1,21 @@
 #!/bin/sh
+if [ -z "$1" ]; then
+        echo "orin module type missing"
+        echo "usage : $0 [ORIN_NX | ORIN_NANO]"
+        exit
+fi
+
+HERE=`pwd`
+if [ "$1" = "ORIN_NANO" ]; then
+        echo "Compiling for ORIN_NANO"
+
+        JETPACK="${HERE}/../JetPack_5.1.5_Linux_JETSON_ORIN_NANO_TARGETS/Linux_for_Tegra"
+fi
+
+if [ "$1" = "ORIN_NX" ]; then
+        echo "Compiling for ORIN_NX"
+        JETPACK="${HERE}/../JetPack_5.1.5_Linux_JETSON_ORIN_NX_TARGETS/Linux_for_Tegra"
+fi
+
 cd $JETPACK
 sudo ./tools/kernel_flash/l4t_initrd_flash.sh --external-device nvme0n1p1 -c tools/kernel_flash/flash_l4t_external.xml -p "-c bootloader/t186ref/cfg/flash_t234_qspi.xml" --showlogs --network usb0 jetson-orin-nano-devkit internal
