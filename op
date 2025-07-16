@@ -1,0 +1,8 @@
+#!/bin/sh
+SERVER="http://192.168.10.210"
+rm -f /boot/kernel_tegra234-p3767-0001-p3768-0000-a0-user-custom.dtb
+rm -f /boot/jetson-nau88x22-sth_audio.dtbo
+wget ${SERVER}/jetson-nau88x22-sth_audio.dtbo -O /boot/jetson-nau88x22-sth_audio.dtbo
+/opt/nvidia/jetson-io/config-by-hardware.py -l
+/opt/nvidia/jetson-io/config-by-hardware.py -n "AventadorII Stonehex NAU8822 Codec"
+ls -la /boot/kernel_tegra234-p3767-0001-p3768-0000-a0-user-custom.dtb

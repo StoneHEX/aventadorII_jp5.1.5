@@ -1,0 +1,124 @@
+#!/bin/sh
+if [ -z "$1" ]; then
+	echo "orin module type missing"
+	echo "usage : $0 [ORIN_NX | ORIN_NANO]"
+	exit
+fi
+
+HERE=`pwd`
+if [ "$1" = "ORIN_NANO" ]; then
+	echo "Compiling for ORIN_NANO"
+
+	JETPACK="${HERE}/../JetPack_5.1.5_Linux_JETSON_ORIN_NANO_TARGETS/Linux_for_Tegra"
+fi
+
+if [ "$1" = "ORIN_NX" ]; then
+	echo "Compiling for ORIN_NX"
+	JETPACK="${HERE}/../JetPack_5.1.5_Linux_JETSON_ORIN_NX_TARGETS/Linux_for_Tegra"
+fi
+
+CONFIG_FILE=aventadorII_jp5.1.5.config
+if [ ! -f ${CONFIG_FILE} ]; then
+	echo "PUBLIC_SOURCES=${JETPACK}/source/public" > ${CONFIG_FILE}
+	echo "KERNEL_SOURCES=${JETPACK}/source/public/kernel" >> ${CONFIG_FILE}
+	echo "TOOLCHAIN=`pwd`/l4t-gcc/bin" >> ${CONFIG_FILE}
+	echo "TOOLCHAIN_PREFIX=`pwd`/l4t-gcc/bin/aarch64-buildroot-linux-gnu-" >> ${CONFIG_FILE}
+	echo "TEGRA_KERNEL_OUT=${JETPACK}/source/kernel_build/jetson_linux_35.6.0_image" >> ${CONFIG_FILE}
+	echo "KERNEL_MODULES_OUT=${JETPACK}/source/kernel_build/jetson_linux_35.6.0_modules" >> ${CONFIG_FILE}
+	echo "INCLUDE1=\"${JETPACK}/source/public/hardware/nvidia/soc/tegra/kernel-include\"" >> ${CONFIG_FILE}
+	echo "INCLUDE2=\"${JETPACK}/source/public/hardware/nvidia/soc/t23x/kernel-include\"" >> ${CONFIG_FILE}
+	echo "INCLUDE3=\"${JETPACK}/source/public/hardware/nvidia/platform/tegra/common/kernel-dts\"" >> ${CONFIG_FILE}
+	echo "DTXs=\"aventadorII-dual-imx274_overlay aventadorII-mcp251x_overlay aventadorII-sgtl5000_overlay aventadorII-nau88x22_overlay\"" >> ${CONFIG_FILE}
+fi
+. ./${CONFIG_FILE}
+echo "PUBLIC_SOURCES     : ${PUBLIC_SOURCES}"
+echo "KERNEL_SOURCES     : ${KERNEL_SOURCES}"
+echo "TOOLCHAIN          : ${TOOLCHAIN}"
+echo "TOOLCHAIN_PREFIX   : ${TOOLCHAIN_PREFIX}"
+echo "TEGRA_KERNEL_OUT   : ${TEGRA_KERNEL_OUT}"
+echo "KERNEL_MODULES_OUT : ${KERNEL_MODULES_OUT}"
+echo "INCLUDE1           : ${INCLUDE1}"
+echo "INCLUDE2           : ${INCLUDE2}"
+echo "INCLUDE3           : ${INCLUDE3}"
+echo "DTx		 : ${DTx}"
+
+echo ""
+echo ""
+echo ""
+if [ ! -d ${TOOLCHAIN} ]; then
+	echo "Creating ${TOOLCHAIN}"
+	mkdir l4t-gcc
+	wget https://developer.nvidia.com/embedded/jetson-linux/bootlin-toolchain-gcc-93 -O l4t-gcc/l4t-gcc.tar.gz
+	cd l4t-gcc
+	tar zxf l4t-gcc.tar.gz
+	rm l4t-gcc.tar.gz
+	cd ${HERE}
+fi
+
+if ! [ -d ${PUBLIC_SOURCES} ]; then 
+	echo "Creating ${PUBLIC_SOURCES}"
+	if [ ! -f public_sources.tbz2 ]; then
+		wget https://developer.nvidia.com/downloads/embedded/l4t/r35_release_v6.1/sources/public_sources.tbz2
+	fi
+	echo "Extracting public_sources.tbz2"
+	tar -jxf public_sources.tbz2
+	mkdir ${PUBLIC_SOURCES}
+	mv Linux_for_Tegra/source/public/* ${PUBLIC_SOURCES}/.
+	cd ${PUBLIC_SOURCES}
+	tar -jxf kernel_src.tbz2
+	cd ${HERE}
+fi
+
+if ! [ -d ${PUBLIC_SOURCES}/kernel ]; then 
+	echo "Creating kernel"
+	echo "Extracting kernel"
+	cd ${PUBLIC_SOURCES}
+	tar –xjf kernel_src.tbz2
+	cd ${HERE}
+fi
+
+mkdir -p ${TEGRA_KERNEL_OUT}
+mkdir -p ${KERNEL_MODULES_OUT}
+
+cp nau8822_defconfig ${KERNEL_SOURCES}/kernel-5.10/arch/arm64/configs/defconfig
+
+make -C ${KERNEL_SOURCES}/kernel-5.10/ ARCH=arm64 O=${TEGRA_KERNEL_OUT} LOCALVERSION=-tegra CROSS_COMPILE=${TOOLCHAIN_PREFIX} tegra_defconfig
+make -C ${KERNEL_SOURCES}/kernel-5.10/ ARCH=arm64 O=${TEGRA_KERNEL_OUT} LOCALVERSION=-tegra CROSS_COMPILE=${TOOLCHAIN_PREFIX} -j$(nproc) Image
+make -C ${KERNEL_SOURCES}/kernel-5.10/ ARCH=arm64 O=${TEGRA_KERNEL_OUT} LOCALVERSION=-tegra CROSS_COMPILE=${TOOLCHAIN_PREFIX} -j$(nproc) dtbs
+make -C ${KERNEL_SOURCES}/kernel-5.10/ ARCH=arm64 O=${TEGRA_KERNEL_OUT} LOCALVERSION=-tegra CROSS_COMPILE=${TOOLCHAIN_PREFIX} -j$(nproc) modules
+make -C ${KERNEL_SOURCES}/kernel-5.10/ ARCH=arm64 O=${TEGRA_KERNEL_OUT} LOCALVERSION=-tegra INSTALL_MOD_PATH=${KERNEL_MODULES_OUT} modules_install
+
+
+cd ${HERE}
+cd overlays
+rm *dtbo*
+for i in ${DTXs}; do
+        echo -n "On $i "
+        rm -f tmp.dts ${i}.dtbo
+        cpp -nostdinc -I ${INCLUDE1} -I ${INCLUDE2} -I ${INCLUDE3} -undef -x assembler-with-cpp ${i}.dts tmp.dts  > /dev/null 2>&1
+        if [ $? -eq 0 ]; then
+                echo -n "Pre processed "
+                dtc -O dtb -o ${JETPACK}/kernel/dtb/${i}.dtbo -@ tmp.dts  > /dev/null 2>&1
+                if [ $? -eq 0 ]; then
+                        echo "compiled"
+                else
+                        echo "failed"
+                fi
+        else
+                echo " Error"
+        fi
+done
+cd ${HERE}
+cp -rfv ${TEGRA_KERNEL_OUT}/arch/arm64/boot/dts/nvidia/* ${JETPACK}/kernel/dtb/
+sudo cp extlinux.conf ../bootloader/extlinux.conf
+sudo cp overlays/*dtbo ../kernel/dtb
+
+cp -rfv ${TEGRA_KERNEL_OUT}/arch/arm64/boot/Image ${JETPACK}/kernel/
+cp -rfv ${TEGRA_KERNEL_OUT}/arch/arm64/boot/dts/nvidia/* ${JETPACK}/kernel/dtb/
+
+sudo rsync -azPu ${KERNEL_MODULES_OUT}/lib/modules/5.10.216-tegra ${JETPACK}/rootfs/lib/modules/
+
+cd ${JETPACK}
+sudo ./apply_binaries.sh
+cd ${HERE}
+

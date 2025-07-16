@@ -1,0 +1,160 @@
+// SPDX-License-Identifier: GPL-2.0-only
+/*
+ * Jetson Device-tree overlay for NAU88x22
+ *
+ * Copyright (c) 2019-2022, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+ *
+ */
+
+/dts-v1/;
+/plugin/;
+
+#include <dt-bindings/pinctrl/pinctrl-tegra.h>
+#include <dt-common/jetson/tegra234-p3767-0000-common.h>
+/ {
+        overlay-name = "AventadorII Stonehex NAU8822 Codec";
+        jetson-header-name = "Jetson 40pin Header";
+	compatible = "nvidia,p3768-0000+p3767-0001";
+
+        fragment@0 
+	{
+                target-path = "/";
+                __overlay__ 
+		{
+			i2c@3160000 {
+				status = "okay";
+				#address-cells = <1>;
+				#size-cells = <0>;
+				clock-frequency = <1000000>;
+
+				nau8822: nau8822@1a {
+				        compatible = "nuvoton,nau8822";
+				        reg = <0x1a>;
+		                        #sound-dai-cells = <0>;
+		                        status = "okay";
+					clock-frequency = <400000>;
+
+		                        sound-name-prefix = "nau";
+
+		                        port 
+		                        {
+		                                nau8822_ep: endpoint 
+		                                {
+		                                        remote-endpoint = <&hdr40_snd_i2s_dap_ep>;
+		                                        link-name = "sound-nau8822";
+		                                };
+		                        };
+				};
+			};
+		};
+	};	
+
+
+        fragment@1 
+	{
+                target-path = "/";
+                __overlay__ 
+		{
+			clocks {
+				nau8822_mclk: nau8822_mclk {
+					compatible = "fixed-clock";
+					#clock-cells = <0>;
+					clock-frequency = <12288000>;
+					clock-output-names = "nau8822-mclk";
+					status = "okay";
+				};
+			};
+		};
+	};
+
+        fragment@2 {
+                target = <&tegra_sound>;
+                __overlay__ {
+			nvidia-audio-card,widgets = 
+				"Microphone",	"nau Mic",
+				"Headphone",	"nau Spkr";
+			nvidia-audio-card,routing =
+				"nau Spkr",	"nau LHP",
+				"nau Spkr",	"nau RHP",
+				"nau LMICN",	"nau Mic",
+				"nau LMICP",	"nau Mic",
+				"nau RMICN",	"nau Mic",
+				"nau RMICP",	"nau Mic";
+		};
+        };
+
+        fragment@3 {
+                target = <&hdr40_snd_link_i2s>;
+                __overlay__ {
+                        link-name = "nau-capture";
+                        bitclock-master;
+                        frame-master;
+
+                        codec {
+                                sound-dai = <&nau8822 1>;
+                                prefix = "nau";
+                        };
+                };
+        };
+
+
+        fragment@4 {
+                target = <&pinmux>;
+                __overlay__ {
+                        pinctrl-names = "default";
+                        pinctrl-0 = <&jetson_io_pinmux>;
+
+
+                        jetson_io_pinmux: exp-header-pinmux {
+                                hdr40-pin7 {
+                                        nvidia,pins = HDR40_PIN7;
+                                        nvidia,function = HDR40_CLK;
+                                        nvidia,pull = <TEGRA_PIN_PULL_DOWN>;
+                                        nvidia,tristate = <TEGRA_PIN_DISABLE>;
+                                        nvidia,enable-input = <TEGRA_PIN_ENABLE>;
+                                };
+
+                                hdr40-pin12 {
+                                        nvidia,pins = HDR40_PIN12;
+                                        nvidia,function = HDR40_I2S;
+                                        nvidia,pull = <TEGRA_PIN_PULL_DOWN>;
+                                        nvidia,tristate = <TEGRA_PIN_DISABLE>;
+                                        nvidia,enable-input = <TEGRA_PIN_ENABLE>;
+                                };
+
+                                hdr40-pin35 {
+                                        nvidia,pins = HDR40_PIN35;
+                                        nvidia,function = HDR40_I2S;
+                                        nvidia,pull = <TEGRA_PIN_PULL_DOWN>;
+                                        nvidia,tristate = <TEGRA_PIN_DISABLE>;
+                                        nvidia,enable-input = <TEGRA_PIN_ENABLE>;
+                                };
+
+                                hdr40-pin38 {
+                                        nvidia,pins = HDR40_PIN38;
+                                        nvidia,function = HDR40_I2S;
+                                        nvidia,pull = <TEGRA_PIN_PULL_DOWN>;
+                                        nvidia,tristate = <TEGRA_PIN_ENABLE>;
+                                        nvidia,enable-input = <TEGRA_PIN_ENABLE>;
+                                };
+
+                                hdr40-pin40 {
+                                        nvidia,pins = HDR40_PIN40;
+                                        nvidia,function = HDR40_I2S;
+                                        nvidia,pull = <TEGRA_PIN_PULL_DOWN>;
+                                        nvidia,tristate = <TEGRA_PIN_DISABLE>;
+                                        nvidia,enable-input = <TEGRA_PIN_DISABLE>;
+                                };
+                        };
+                };
+        };
+
+        fragment@5 {
+                target = <&hdr40_snd_i2s_dap_ep>;
+                __overlay__ {
+                        bitclock-master;
+                        frame-master;
+                        remote-endpoint = <&nau8822_ep>;
+                };
+        };
+};
