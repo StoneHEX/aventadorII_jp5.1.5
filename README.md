@@ -1,6 +1,8 @@
 # aventadorII_jp5.1.5
 
-JETPACK 5.1.5 build system for AventadorII.<br>
+#JETPACK 5.1.5 build system for AventadorII.<br>
+Installation notes:<br>
+Download or clone the repo and expand in the <sdk_manager_installation_path> ( the one where you find JetPack_5.1.5_Linux_JETSON_ORIN_NX_TARGETS or JetPack_5.1.5_Linux_JETSON_ORIN_NANO_TARGETS)<br><br>
 The <b>compile_kernel</b> script creates a new kernel with camera, spi can and audio as separately loadable overlays.<br>
 Example : <br>
 <b>./compile_kernel ORIN_NX</b> creates a ORIN NX kernel <br>
