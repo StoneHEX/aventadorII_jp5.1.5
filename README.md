@@ -4,8 +4,8 @@
 The scripts in this repo run on a completely running sdkmanager created system and modify the standard sdkmanager installed system to include some new drivers described below.<br>
 If you plan to use both NANO and NX modules you have to install both targets.<br>
 # Version Notes
-These scripts run for JP5.1.5.<br>
-If it happens you have a JP6 version flashed on the Orin module the flash operations of the new file system will fail due<br>
+These scripts are designed for JP5.1.5.<br>
+If you have a JP6 version flashed on the Orin module the flash operations of the new file system will fail due<br>
 to non coherent contents present on QSPI memory module.<br>
 In order to downgrade a previously installed JP6 from $JETPACK you should issue :<br>
 <b> sudo ./flash.sh -c ./bootloader/t186ref/cfg/flash_t234_qspi.xml jetson-orin-nano-devkit mmcblk0p1</b>
