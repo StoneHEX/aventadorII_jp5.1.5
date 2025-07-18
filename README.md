@@ -1,4 +1,3 @@
-# aventadorII_jp5.1.5
 # JETPACK 5.1.5 build system for AventadorII
 # Prerequisites
 The scripts in this repo run on a completely running sdkmanager created system and modify the standard sdkmanager installed system to include some new drivers described below.<br>
