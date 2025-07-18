@@ -3,6 +3,16 @@
 # Prerequisites
 The scripts in this repo run on a completely running sdkmanager created system and modify the standard sdkmanager installed system to include some new drivers described below.<br>
 If you plan to use both NANO and NX modules you have to install both targets.<br>
+# Version Notes
+These scripts run for JP5.1.5.<br>
+If it happens you have a JP6 version flashed on the Orin module the flash operations of the new file system will fail due<br>
+to non coherent contents present on QSPI memory module.<br>
+In order to downgrade a previously installed JP6 from $JETPACK you should issue :<br>
+<b> sudo ./flash.sh -c ./bootloader/t186ref/cfg/flash_t234_qspi.xml jetson-orin-nano-devkit mmcblk0p1</b>
+where $JETPACK is, for example:<br>
+<sdk_manager_installation_path>/JetPack_5.1.5_Linux_JETSON_ORIN_NX_TARGETS/Linux_for_Tegra<br>
+Doing this you will get the full 7.2 GB memory available on Orin module<br>
+as described in https://jetsonhacks.com/2023/05/26/jetson-orin-nano-flashing-qspi-firmware-for-more-memory/<br>
 # Installation notes
 Download or clone the repo and expand in the <sdk_manager_installation_path> ( the one where you find JetPack_5.1.5_Linux_JETSON_ORIN_NX_TARGETS or JetPack_5.1.5_Linux_JETSON_ORIN_NANO_TARGETS directories)<br><br>
 # How to use<br>
@@ -13,11 +23,6 @@ Example : <br>
 This script download the compiler if not available and all the requested modules.<br><br>
 The <b>./aventadorII_flash ORIN_NX</b> flashes the newly created kernel and modules on the AventadorII Orin NX module.<br>
 The <b>./aventadorII_flash ORIN_NANO</b> flashes the newly created kernel and modules on the AventadorII Orin NANO module.<br><br>
-# Additional Notes
-In order to downgrade a previously installed JP6 from $JETPACK you can issue :<br>
-<b> sudo ./flash.sh -c ./bootloader/t186ref/cfg/flash_t234_qspi.xml jetson-orin-nano-devkit mmcblk0p1</b>
-where $JETPACK is, for example:<br>
-<sdk_manager_installation_path>/JetPack_5.1.5_Linux_JETSON_ORIN_NX_TARGETS/Linux_for_Tegra<br>
 # SanDisk on board disk
 AventadorII can be equipped with an on board PCIe disk up to 1TB.<br>
 The disk is connected to the PCIe1 bus, on the two available lanes.<br>
