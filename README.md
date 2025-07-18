@@ -26,8 +26,7 @@ The <b>./aventadorII_flash ORIN_NANO</b> flashes the newly created kernel and mo
 AventadorII can be equipped with an on board PCIe disk up to 1TB.<br>
 The disk is connected to the PCIe1 bus, on the two available lanes.<br>
 This disk can be used as additional storage or main disk.<br>
-To use the Sandisk soldered down disk simply leave empty the M.2 slot so these scripts or the nVidia sdkmanager will<br>
-use it as system disk.<br>
+To use the Sandisk soldered down disk simply leave empty the M.2 slot so these scripts or the nVidia sdkmanager will use it as system disk.<br>
 The folder <b>Sandisk</b> contains the test script using fio and the results on a 256GB disk.<br>
 The system must have a JetPack 5.1.5 installed on the M.2 disk and the tests are done on the whole Sandisk disk that should be identified with nvme1n1.<br>
 Be careful as in this case the nvme0n1 is the system disk.<br>
