@@ -1,0 +1,216 @@
+0007:01:00.0 Non-Volatile memory controller: Sandisk Corp Device 5040 (rev 03) (prog-if 02 [NVM Express])
+	Subsystem: Sandisk Corp Device 5040
+	Control: I/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr- Stepping- SERR- FastB2B- DisINTx+
+	Status: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-
+	Latency: 0
+	Interrupt: pin A routed to IRQ 59
+	Region 0: Memory at 3228000000 (64-bit, non-prefetchable) [size=16K]
+	Capabilities: [40] Power Management version 3
+		Flags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0-,D1-,D2-,D3hot-,D3cold-)
+		Status: D0 NoSoftRst+ PME-Enable- DSel=0 DScale=0 PME-
+	Capabilities: [50] MSI: Enable- Count=1/8 Maskable+ 64bit+
+		Address: 0000000000000000  Data: 0000
+		Masking: 00000000  Pending: 00000000
+	Capabilities: [70] Express (v2) Endpoint, MSI 00
+		DevCap:	MaxPayload 512 bytes, PhantFunc 0, Latency L0s unlimited, L1 unlimited
+			ExtTag- AttnBtn- AttnInd- PwrInd- RBE+ FLReset+ SlotPowerLimit 0.000W
+		DevCtl:	CorrErr+ NonFatalErr+ FatalErr+ UnsupReq+
+			RlxdOrd+ ExtTag- PhantFunc- AuxPwr- NoSnoop- FLReset-
+			MaxPayload 256 bytes, MaxReadReq 512 bytes
+		DevSta:	CorrErr- NonFatalErr- FatalErr- UnsupReq- AuxPwr+ TransPend-
+		LnkCap:	Port #0, Speed 16GT/s, Width x4, ASPM L1, Exit Latency L1 <8us
+			ClockPM+ Surprise- LLActRep- BwNot- ASPMOptComp+
+		LnkCtl:	ASPM Disabled; RCB 64 bytes Disabled- CommClk-
+			ExtSynch- ClockPM+ AutWidDis- BWInt- AutBWInt-
+		LnkSta:	Speed 8GT/s (downgraded), Width x2 (downgraded)
+			TrErr- Train- SlotClk+ DLActive- BWMgmt- ABWMgmt-
+		DevCap2: Completion Timeout: Range ABCD, TimeoutDis+, NROPrPrP-, LTR+
+			 10BitTagComp+, 10BitTagReq-, OBFF Not Supported, ExtFmt-, EETLPPrefix-
+			 EmergencyPowerReduction Not Supported, EmergencyPowerReductionInit-
+			 FRS+, TPHComp-, ExtTPHComp-
+			 AtomicOpsCap: 32bit- 64bit- 128bitCAS-
+		DevCtl2: Completion Timeout: 50us to 50ms, TimeoutDis-, LTR+, OBFF Disabled
+			 AtomicOpsCtl: ReqEn-
+		LnkCtl2: Target Link Speed: 16GT/s, EnterCompliance- SpeedDis-
+			 Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-
+			 Compliance De-emphasis: -6dB
+		LnkSta2: Current De-emphasis Level: -6dB, EqualizationComplete+, EqualizationPhase1+
+			 EqualizationPhase2+, EqualizationPhase3+, LinkEqualizationRequest-
+	Capabilities: [b0] MSI-X: Enable+ Count=17 Masked-
+		Vector table: BAR=0 offset=00002000
+		PBA: BAR=0 offset=00003000
+	Capabilities: [100 v2] Advanced Error Reporting
+		UESta:	DLP- SDES- TLP- FCP- CmpltTO- CmpltAbrt- UnxCmplt- RxOF- MalfTLP- ECRC- UnsupReq- ACSViol-
+		UEMsk:	DLP- SDES- TLP- FCP- CmpltTO- CmpltAbrt- UnxCmplt- RxOF- MalfTLP- ECRC- UnsupReq- ACSViol-
+		UESvrt:	DLP+ SDES+ TLP- FCP+ CmpltTO- CmpltAbrt- UnxCmplt- RxOF+ MalfTLP+ ECRC- UnsupReq- ACSViol-
+		CESta:	RxErr- BadTLP- BadDLLP- Rollover- Timeout- AdvNonFatalErr-
+		CEMsk:	RxErr- BadTLP- BadDLLP- Rollover- Timeout- AdvNonFatalErr+
+		AERCap:	First Error Pointer: 00, ECRCGenCap+ ECRCGenEn- ECRCChkCap+ ECRCChkEn-
+			MultHdrRecCap- MultHdrRecEn- TLPPfxPres- HdrLogCap-
+		HeaderLog: 00000000 00000000 00000000 00000000
+	Capabilities: [158 v1] Alternative Routing-ID Interpretation (ARI)
+		ARICap:	MFVC- ACS-, Next Function: 0
+		ARICtl:	MFVC- ACS-, Function Group: 0
+	Capabilities: [168 v1] Secondary PCI Express
+		LnkCtl3: LnkEquIntrruptEn-, PerformEqu-
+		LaneErrStat: 0
+	Capabilities: [188 v1] Physical Layer 16.0 GT/s <?>
+	Capabilities: [1ac v1] Lane Margining at the Receiver <?>
+	Capabilities: [1c4 v1] Single Root I/O Virtualization (SR-IOV)
+		IOVCap:	Migration-, Interrupt Message Number: 000
+		IOVCtl:	Enable- Migration- Interrupt- MSE- ARIHierarchy+
+		IOVSta:	Migration-
+		Initial VFs: 8, Total VFs: 8, Number of VFs: 0, Function Dependency Link: 00
+		VF offset: 1, stride: 1, Device ID: 0000
+		Supported Page Size: 00000553, System Page Size: 00000001
+		Region 0: Memory at 0000000040004000 (64-bit, non-prefetchable)
+		VF Migration: offset: 00000000, BIR: 0
+	Capabilities: [204 v1] Latency Tolerance Reporting
+		Max snoop latency: 0ns
+		Max no snoop latency: 0ns
+	Capabilities: [20c v1] L1 PM Substates
+		L1SubCap: PCI-PM_L1.2+ PCI-PM_L1.1+ ASPM_L1.2+ ASPM_L1.1+ L1_PM_Substates+
+			  PortCommonModeRestoreTime=10us PortTPowerOnTime=10us
+		L1SubCtl1: PCI-PM_L1.2- PCI-PM_L1.1- ASPM_L1.2- ASPM_L1.1-
+			   T_CommonMode=0us LTR1.2_Threshold=0ns
+		L1SubCtl2: T_PwrOn=10us
+	Kernel driver in use: nvme
+
+
+/***********************************************************************/
+
+
+sudo fio burst_seqwr.txt
+[sudo] password for nvidia: 
+job1: (g=0): rw=write, bs=(R) 128KiB-128KiB, (W) 128KiB-128KiB, (T) 128KiB-128KiB, ioengine=libaio, iodepth=8
+fio-3.16
+Starting 1 thread
+Jobs: 1 (f=1)
+job1: (groupid=0, jobs=1): err= 0: pid=3418: Fri Jul 18 12:26:12 2025
+  write: IOPS=9163, BW=1145MiB/s (1201MB/s)(1024MiB/894msec); 0 zone resets
+    slat (usec): min=13, max=220, avg=33.48, stdev=18.36
+    clat (usec): min=305, max=4695, avg=836.46, stdev=438.34
+     lat (usec): min=350, max=4719, avg=870.38, stdev=437.42
+     lat percentiles (usec):
+     | 50.0000th=[  734], 75.0000th=[  857], 99.0000th=[ 3654],
+     | 99.9000th=[ 4228], 99.9900th=[ 4752], 99.9990th=[ 4752],
+     | 99.9999th=[ 4752]
+   bw (  MiB/s): min= 1146, max= 1146, per=100.00%, avg=1146.75, stdev= 0.00, samples=1
+   iops        : min= 9174, max= 9174, avg=9174.00, stdev= 0.00, samples=1
+  lat (usec)   : 500=0.18%, 750=62.19%, 1000=28.37%
+  lat (msec)   : 2=7.47%, 4=1.51%, 10=0.27%
+  cpu          : usr=3.58%, sys=9.07%, ctx=6431, majf=0, minf=1
+  IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=99.9%, 16=0.0%, 32=0.0%, >=64=0.0%
+     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     complete  : 0=0.0%, 4=100.0%, 8=0.1%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     issued rwts: total=0,8192,0,0 short=0,0,0,0 dropped=0,0,0,0
+     latency   : target=0, window=0, percentile=100.00%, depth=8
+
+Run status group 0 (all jobs):
+  WRITE: bw=1145MiB/s (1201MB/s), 1145MiB/s-1145MiB/s (1201MB/s-1201MB/s), io=1024MiB (1074MB), run=894-894msec
+
+Disk stats (read/write):
+  nvme1n1: ios=0/8093, merge=0/0, ticks=0/6845, in_queue=6845, util=89.84%
+
+
+/***********************************************************************/
+
+
+sudo fio burst_seqrd.txt
+job1: (g=0): rw=read, bs=(R) 128KiB-128KiB, (W) 128KiB-128KiB, (T) 128KiB-128KiB, ioengine=libaio, iodepth=8
+fio-3.16
+Starting 1 thread
+
+job1: (groupid=0, jobs=1): err= 0: pid=3621: Fri Jul 18 12:29:18 2025
+  read: IOPS=13.7k, BW=1715MiB/s (1799MB/s)(1024MiB/597msec)
+    slat (usec): min=7, max=150, avg=28.30, stdev=14.92
+    clat (usec): min=291, max=896, avg=552.68, stdev=45.07
+     lat (usec): min=349, max=1011, avg=581.18, stdev=40.18
+     lat percentiles (usec):
+     | 50.0000th=[  578], 75.0000th=[  603], 99.0000th=[  668],
+     | 99.9000th=[  881], 99.9900th=[ 1012], 99.9990th=[ 1012],
+     | 99.9999th=[ 1012]
+   bw (  MiB/s): min= 1716, max= 1716, per=100.00%, avg=1716.50, stdev= 0.00, samples=1
+   iops        : min=13732, max=13732, avg=13732.00, stdev= 0.00, samples=1
+  lat (usec)   : 500=9.52%, 750=90.33%, 1000=0.15%
+  cpu          : usr=0.67%, sys=11.74%, ctx=6616, majf=0, minf=257
+  IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=99.9%, 16=0.0%, 32=0.0%, >=64=0.0%
+     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     complete  : 0=0.0%, 4=100.0%, 8=0.1%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     issued rwts: total=8192,0,0,0 short=0,0,0,0 dropped=0,0,0,0
+     latency   : target=0, window=0, percentile=100.00%, depth=8
+
+Run status group 0 (all jobs):
+   READ: bw=1715MiB/s (1799MB/s), 1715MiB/s-1715MiB/s (1799MB/s-1799MB/s), io=1024MiB (1074MB), run=597-597msec
+
+Disk stats (read/write):
+  nvme1n1: ios=5324/0, merge=0/0, ticks=3002/0, in_queue=3002, util=80.33%
+
+
+/***********************************************************************/
+
+sudo fio sus_seqwr.txt
+^[[2~job1: (g=0): rw=write, bs=(R) 128KiB-128KiB, (W) 128KiB-128KiB, (T) 128KiB-128KiB, ioengine=libaio, iodepth=8
+fio-3.16
+Starting 1 thread
+Jobs: 1 (f=1): [W(1)][100.0%][w=224MiB/s][w=1790 IOPS][eta 00m:00s]
+job1: (groupid=0, jobs=1): err= 0: pid=3661: Fri Jul 18 12:48:40 2025
+  write: IOPS=1823, BW=228MiB/s (239MB/s)(238GiB/1071523msec); 0 zone resets
+    slat (usec): min=13, max=762, avg=29.56, stdev= 7.51
+    clat (usec): min=225, max=15090, avg=4356.07, stdev=898.72
+     lat (usec): min=287, max=15116, avg=4385.99, stdev=897.92
+     lat percentiles (usec):
+     | 50.0000th=[ 4424], 75.0000th=[ 4752], 99.0000th=[ 8291],
+     | 99.9000th=[10421], 99.9900th=[11338], 99.9990th=[12911],
+     | 99.9999th=[14484]
+   bw (  KiB/s): min=222976, max=1180160, per=99.99%, avg=233335.88, stdev=40876.00, samples=2143
+   iops        : min= 1742, max= 9220, avg=1822.91, stdev=319.35, samples=2143
+  lat (usec)   : 250=0.01%, 500=0.01%, 750=0.58%, 1000=0.27%
+  lat (msec)   : 2=0.07%, 4=28.02%, 10=70.90%, 20=0.16%
+  cpu          : usr=0.62%, sys=1.45%, ctx=1868848, majf=0, minf=1
+  IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=100.0%, 16=0.0%, 32=0.0%, >=64=0.0%
+     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     complete  : 0=0.0%, 4=100.0%, 8=0.1%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     issued rwts: total=0,1953586,0,0 short=0,0,0,0 dropped=0,0,0,0
+     latency   : target=0, window=0, percentile=100.00%, depth=8
+
+Run status group 0 (all jobs):
+  WRITE: bw=228MiB/s (239MB/s), 228MiB/s-228MiB/s (239MB/s-239MB/s), io=238GiB (256GB), run=1071523-1071523msec
+
+Disk stats (read/write):
+  nvme1n1: ios=12/1953298, merge=0/0, ticks=1/8518633, in_queue=8518634, util=100.00%
+
+
+/***********************************************************************/
+
+[sudo] password for nvidia: 
+job1: (g=0): rw=read, bs=(R) 128KiB-128KiB, (W) 128KiB-128KiB, (T) 128KiB-128KiB, ioengine=libaio, iodepth=8
+fio-3.16
+Starting 1 thread
+Jobs: 1 (f=1): [R(1)][100.0%][r=1715MiB/s][r=13.7k IOPS][eta 00m:00s]
+job1: (groupid=0, jobs=1): err= 0: pid=3985: Fri Jul 18 12:51:47 2025
+  read: IOPS=13.7k, BW=1717MiB/s (1801MB/s)(238GiB/142192msec)
+    slat (usec): min=6, max=575, avg=17.87, stdev=10.81
+    clat (usec): min=131, max=3621, avg=562.87, stdev=69.51
+     lat (usec): min=198, max=3632, avg=581.00, stdev=67.16
+     lat percentiles (usec):
+     | 50.0000th=[  578], 75.0000th=[  627], 99.0000th=[  709],
+     | 99.9000th=[  824], 99.9900th=[ 3326], 99.9990th=[ 3490],
+     | 99.9999th=[ 3621]
+   bw (  MiB/s): min= 1699, max= 1726, per=99.99%, avg=1717.14, stdev= 5.35, samples=284
+   iops        : min=13596, max=13810, avg=13737.06, stdev=42.83, samples=284
+  lat (usec)   : 250=0.02%, 500=14.45%, 750=85.31%, 1000=0.20%
+  lat (msec)   : 2=0.01%, 4=0.01%
+  cpu          : usr=0.83%, sys=5.55%, ctx=1326691, majf=0, minf=257
+  IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=100.0%, 16=0.0%, 32=0.0%, >=64=0.0%
+     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     complete  : 0=0.0%, 4=100.0%, 8=0.1%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     issued rwts: total=1953586,0,0,0 short=0,0,0,0 dropped=0,0,0,0
+     latency   : target=0, window=0, percentile=100.00%, depth=8
+
+Run status group 0 (all jobs):
+   READ: bw=1717MiB/s (1801MB/s), 1717MiB/s-1717MiB/s (1801MB/s-1801MB/s), io=238GiB (256GB), run=142192-142192msec
+
+Disk stats (read/write):
+  nvme1n1: ios=1952798/0, merge=0/0, ticks=1077889/0, in_queue=1077888, util=100.00%
+

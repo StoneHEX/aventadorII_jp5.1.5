@@ -18,5 +18,13 @@ In order to downgrade a previously installed JP6 from $JETPACK you can issue :<b
 <b> sudo ./flash.sh -c ./bootloader/t186ref/cfg/flash_t234_qspi.xml jetson-orin-nano-devkit mmcblk0p1</b>
 where $JETPACK is, for example:<br>
 <sdk_manager_installation_path>/JetPack_5.1.5_Linux_JETSON_ORIN_NX_TARGETS/Linux_for_Tegra<br>
+# SanDisk on board disk
+AventadorII can be equipped with an on board PCIe disk up to 1TB.<br>
+The disk is connected to the PCIe1 bus, on the two lanes available.<br>
+The folder <b>Sandisk</b> contains the test script using fio and the results on a 256GB disk.<br>
+The system must have a JetPack 5.1.5 installed on the M.2 disk and the tests are done on the whole Sandisk disk.<br>
+To run the tests the command is:<br>
+<b>sudo fio <test_name></b>
+
 
 
